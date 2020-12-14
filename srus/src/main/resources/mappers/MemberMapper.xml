@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Author: plusperson@gmail.com -->
+<mapper namespace="kr.co.srus.member.MemberMapper">
+	<resultMap id="memberResultMap"
+		type="kr.co.srus.member.Member">
+		<result column="ID" property="id" />
+		<result column="PASSWORD" property="password" />
+		<result column="EMAIL" property="email" />
+		<result column="PHONE_NUMBER" property="phoneNumber" />
+		<result column="DIVISION" property="division" />
+		<result column="WITHDRAWAL_DATE" property="withdrawalDate" />
+		<result column="CARD_NAME" property="cardName" />
+		<result column="CARD_UID" property="cardUid" />
+	</resultMap>
+
+	<sql id="whereSql">
+		<where>
+			<if test="id != null and id != ''">
+				AND ID = BINARY #{id}
+			</if>
+			<if test="password != null and password != ''">
+				AND PASSWORD = BINARY #{password}
+			</if>
+			<if test="email != null and email != ''">
+				AND EMAIL = #{email}
+			</if>
+			<if test="phoneNumber != null and phoneNumber != ''">
+				AND PHONE_NUMBER = #{phoneNumber}
+			</if>
+			<if test="division != ''">
+				AND DIVISION = #{division}
+			</if>
+			<if test="withdrawalDate != null and withdrawalDate != ''">
+				AND WITHDRAWAL_DATE = #{withdrawalDate}
+			</if>
+			<if test="cardName != null and cardName != ''">
+				AND CARD_NAME = #{cardName}
+			</if>
+			<if test="cardUid != null and cardUid != ''">
+				AND CARD_UID = #{cardUid}
+			</if>
+		</where>
+	</sql>
+
+	<insert id="insert" parameterType="kr.co.srus.member.Member">
+		INSERT INTO member (
+		ID,
+		PASSWORD,
+		EMAIL,
+		PHONE_NUMBER,
+		DIVISION,
+		WITHDRAWAL_DATE,
+		CARD_NAME,
+		CARD_UID
+		) VALUES (
+		#{id},
+		#{password},
+		#{email},
+		#{phoneNumber},
+		#{division},
+		#{withdrawalDate},
+		#{cardName},
+		#{cardUid}
+		)
+	</insert>
+
+	<select id="selectAll" parameterType="kr.co.srus.member.Member"
+		resultMap="memberResultMap">
+		SELECT *
+		FROM member
+		<include refid="whereSql" />
+		ORDER BY ID
+	</select>
+	
+	<select id="selectAllById" parameterType="kr.co.srus.member.Member"
+		resultMap="memberResultMap">
+		SELECT *
+		FROM member
+		<if test="id != null and id != ''">
+			WHERE ID LIKE CONCAT('%', #{id}, '%')
+		</if>
+		ORDER BY ID
+	</select>
+
+	<select id="select" parameterType="kr.co.srus.member.Member"
+		resultMap="memberResultMap">
+		SELECT
+		ID,
+		PASSWORD,
+		EMAIL,
+		PHONE_NUMBER,
+		DIVISION,
+		WITHDRAWAL_DATE,
+		CARD_NAME,
+		CARD_UID
+		FROM member
+		<include refid="whereSql" />
+		ORDER BY ID
+	</select>
+
+	<update id="update" parameterType="kr.co.srus.member.Member">
+		UPDATE member
+		<set>
+			<if test="password != null">
+				PASSWORD = #{password},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email},
+			</if>
+			<if test="phoneNumber != null">
+				PHONE_NUMBER = #{phoneNumber},
+			</if>
+			<if test="division != ''">
+				DIVISION = #{division},
+			</if>
+			<if test="withdrawalDate != null">
+				WITHDRAWAL_DATE = #{withdrawalDate},
+			</if>
+			<if test="cardName != null">
+				CARD_NAME = #{cardName},
+			</if>
+			<if test="cardUid != null">
+				CARD_UID = #{cardUid},
+			</if>
+		</set>
+		where ID = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Author: plusperson@gmail.com -->
+<mapper namespace="kr.co.srus.usagehistory.UsageHistoryMapper">
+    <resultMap id="usageHistoryResultMap" type="kr.co.srus.usagehistory.UsageHistory">
+        <result column="NO" property="no" />
+        <result column="MEMBER_ID" property="memberId" />
+        <result column="RENTAL_BOX_NO" property="rentalBoxNo" />
+        <result column="USAGE_DATE" property="usageDate" />
+        <result column="DIVISION" property="division" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != 0">
+                AND NO = #{no}
+            </if>
+            <if test="memberId != null and memberId != ''">
+                AND MEMBER_ID = #{memberId}
+            </if>
+            <if test="rentalBoxNo != 0">
+                AND RENTAL_BOX_NO = #{rentalBoxNo}
+            </if>																																																				
+            <if test="usageDate != null">
+                AND USAGE_DATE = #{usageDate}
+            </if>
+            <if test="division != null and division != ''">
+                AND DIVISION = #{division}
+            </if>
+        </where>
+    </sql>
+    
+	  <insert id="insert" parameterType="kr.co.srus.usagehistory.UsageHistory">
+        INSERT INTO usage_history (
+            NO,
+            MEMBER_ID,
+            RENTAL_BOX_NO,
+            USAGE_DATE,
+            DIVISION
+        ) VALUES (
+            #{no},
+            #{memberId},
+            #{rentalBoxNo},
+            #{usageDate},
+            #{division}
+        )
+    </insert>
+
+    <select id="selectAll" parameterType="kr.co.srus.usagehistory.UsageHistory" resultMap="usageHistoryResultMap">
+        SELECT *
+        FROM usage_history
+        <include refid="whereSql" />
+        ORDER BY NO
+    </select>
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Author: plusperson@gmail.com -->
+<mapper namespace="kr.co.srus.rentalbox.RentalBoxMapper">
+    <resultMap id="rentalBoxResultMap" type="kr.co.srus.rentalbox.RentalBox">
+        <result column="NO" property="no" />
+        <result column="CHARGE" property="charge" />
+        <result column="MODEL" property="model" />
+        <result column="LOCATION" property="location" />
+        <result column="AUTH_KEY" property="authKey" />
+        <result column="AUTH_ISSUE_DATE" property="authIssueDate" />
+        <result column="DIVISION" property="division" />
+        <result column="SIZE" property="size" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != 0">
+                AND NO = #{no}
+            </if>
+            <if test="charge != 0">
+                AND CHARGE = #{charge}
+            </if>
+            <if test="model != null and model != ''">
+                AND MODEL = #{model}
+            </if>
+            <if test="location != null and location != ''">
+                AND LOCATION = #{location}
+            </if>
+            <if test="authKey != null and authKey != ''">
+                AND AUTH_KEY = #{authKey}
+            </if>
+            <if test="authIssueDate != null and authIssueDate != ''">
+                AND AUTH_ISSUE_DATE = #{authIssueDate}
+            </if>
+            <if test="division != ''">
+                AND DIVISION = #{division}
+            </if>
+            <if test="size != null and size != ''">
+                AND SIZE = #{size}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="selectAll" parameterType="kr.co.srus.rentalbox.RentalBox" resultMap="rentalBoxResultMap">
+        SELECT *
+        FROM rental_box
+        <include refid="whereSql" />
+        ORDER BY NO
+    </select>
+
+    <select id="select" parameterType="kr.co.srus.rentalbox.RentalBox" resultMap="rentalBoxResultMap">
+        SELECT
+            NO,
+            CHARGE,
+            MODEL,
+            LOCATION,
+            AUTH_KEY,
+            AUTH_ISSUE_DATE,
+            DIVISION,
+            SIZE
+        FROM rental_box
+        <include refid="whereSql" />
+        ORDER BY NO
+    </select>
+
+    <insert id="insert" parameterType="kr.co.srus.rentalbox.RentalBox">
+        INSERT INTO rental_box (
+            NO,
+            CHARGE,
+            MODEL,
+            LOCATION,
+            AUTH_KEY,
+            AUTH_ISSUE_DATE,
+            DIVISION,
+            SIZE
+        ) VALUES (
+            #{no},
+            #{charge},
+            #{model},
+            #{location},
+            #{authKey},
+            #{authIssueDate},
+            'Y',
+            #{size}
+        )
+    </insert>
+
+    <update id="update" parameterType="kr.co.srus.rentalbox.RentalBox">
+        UPDATE rental_box
+        <set>
+            <if test="charge != 0">
+                CHARGE = #{charge},
+            </if>
+            <if test="model != null">
+                MODEL = #{model},
+            </if>
+            <if test="location != null">
+                LOCATION = #{location},
+            </if>
+            <if test="authKey != null">
+                AUTH_KEY = #{authKey},
+            </if>
+            <if test="authIssueDate != null">
+                AUTH_ISSUE_DATE = #{authIssueDate},
+            </if>
+            <if test="division != ''">
+                DIVISION = #{division},
+            </if>
+            <if test="size != null">
+                SIZE = #{size},
+            </if>
+        </set>
+        where NO = #{no}
+    </update>
+    
+     <update id="updateAuth" parameterType="kr.co.srus.rentalbox.RentalBox">
+        UPDATE rental_box
+		set AUTH_KEY = #{authKey},
+			AUTH_ISSUE_DATE = #{authIssueDate}
+        where NO = #{no}
+    </update>
+</mapper>

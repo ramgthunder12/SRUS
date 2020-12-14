@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Author: plusperson@gmail.com -->
+<mapper namespace="kr.co.srus.rental.RentalMapper">
+    <resultMap id="rentalResultMap" type="kr.co.srus.rental.Rental">
+        <result column="NO" property="no" />
+        <result column="MEMBER_ID" property="memberId" />
+        <result column="RENTAL_BOX_NO" property="rentalBoxNo" />
+        <result column="PAYMENT_DATE" property="paymentDate" />
+        <result column="AMOUNT_OF_PAYMENT" property="amountOfPayment" />
+        <result column="START_DATE" property="startDate" />
+        <result column="END_DATE" property="endDate" />
+        <result column="CANCELLATION_DATE" property="cancellationDate" />
+        <result column="MERCHANT_UID" property="merchantUid" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != 0">
+                AND NO = #{no}
+            </if>
+            <if test="memberId != null and memberId != ''">
+                AND MEMBER_ID = #{memberId}
+            </if>
+            <if test="rentalBoxNo != 0">
+                AND RENTAL_BOX_NO = #{rentalBoxNo}
+            </if>
+            <if test="paymentDate != null and paymentDate != ''">
+                AND PAYMENT_DATE = #{paymentDate}
+            </if>
+            <if test="amountOfPayment != null and amountOfPayment != ''">
+                AND AMOUNT_OF_PAYMENT = #{amountOfPayment}
+            </if>
+            <if test="startDate != null and startDate != ''">
+                AND START_DATE = #{startDate}
+            </if>
+            <if test="endDate != null and endDate != ''">
+                AND END_DATE = #{endDate}
+            </if>
+            <if test="cancellationDate != null and cancellationDate != ''">
+                AND CANCELLATION_DATE = #{cancellationDate}
+            </if>
+            <if test="merchantUid != null and merchantUid != ''">
+            	AND MERCHANT_UID = #{merchantUid}
+            </if>
+        </where>
+    </sql>
+    
+ 	<insert id="insert" parameterType="kr.co.srus.rental.Rental">
+        INSERT INTO RENTAL (
+            MEMBER_ID,
+            RENTAL_BOX_NO,
+            PAYMENT_DATE,
+            AMOUNT_OF_PAYMENT,
+            START_DATE,
+            END_DATE,
+            MERCHANT_UID
+        ) VALUES (
+            #{memberId},
+            #{rentalBoxNo},
+            #{paymentDate},
+            #{amountOfPayment},
+            #{startDate},
+            #{endDate},
+            #{merchantUid}
+        )
+    </insert>
+
+    <select id="selectAll" parameterType="kr.co.srus.rental.Rental" resultMap="rentalResultMap">
+        SELECT *
+        FROM RENTAL
+        <include refid="whereSql" />
+        ORDER BY NO
+    </select>
+    
+    <select id="selectAllById" parameterType="kr.co.srus.rental.Rental" resultMap="rentalResultMap">
+		SELECT *
+		FROM RENTAL
+		<if test="memberId != null and memberId != ''">
+			WHERE MEMBER_ID LIKE CONCAT('%', #{memberId}, '%')
+		</if>
+		ORDER BY MEMBER_ID
+	</select>
+    
+    <select id="select" parameterType="kr.co.srus.rental.Rental" resultMap="rentalResultMap">
+        SELECT
+            NO,
+            MEMBER_ID,
+            RENTAL_BOX_NO,
+            PAYMENT_DATE,
+            AMOUNT_OF_PAYMENT,
+            START_DATE,
+            END_DATE,
+            CANCELLATION_DATE,
+            MERCHANT_UID
+        FROM RENTAL
+        <include refid="whereSql" />
+        ORDER BY NO
+    </select>
+
+    <update id="update" parameterType="kr.co.srus.rental.Rental">
+        UPDATE RENTAL
+        <set>
+            <if test="memberId != null">
+                MEMBER_ID = #{memberId},
+            </if>
+            <if test="rentalBoxNo != 0">
+                RENTAL_BOX_NO = #{rentalBoxNo},
+            </if>
+            <if test="paymentDate != null">
+                PAYMENT_DATE = #{paymentDate},
+            </if>
+            <if test="amountOfPayment != null">
+                AMOUNT_OF_PAYMENT = #{amountOfPayment},
+            </if>
+            <if test="startDate != null">
+                START_DATE = #{startDate},
+            </if>
+            <if test="endDate != null">
+                END_DATE = #{endDate},
+            </if>
+            <if test="cancellationDate != null">
+                CANCELLATION_DATE = #{cancellationDate},
+            </if>
+            <if test="merchantUid != null">
+            	MERCHANT_UID = #{merchantUid},
+            </if>
+        </set>
+        WHERE NO = #{no}
+    </update>
+</mapper>
