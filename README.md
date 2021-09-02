@@ -35,8 +35,8 @@
 * JAVA, Servlet, JSP, SQL, HTML, Javascript, CSS, JQuery
 
 ###개발 도구
-Eclipse, MySQL, Oracle 18c, MySQL Workbench, SQL Developer, 
-Tomcat, Subversion, Git, Maven, Star UML
+* Eclipse, MySQL, Oracle 18c, MySQL Workbench, SQL Developer, 
+* Tomcat, Subversion, Git, Maven, Star UML
 
 ###프레임워크 및 패턴 
 * Spring 5, MyBatis, Spring Boot
