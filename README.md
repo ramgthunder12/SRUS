@@ -1,12 +1,14 @@
 # SRUS(SpaceRentalUnmannedSystem)
 ---
-##프로젝트 구성
-###프로젝트 명 : IoT를 활용한 공간 대여 무인 시스템
-###구현 목표 : IoT를 이용한 인증을 통해 무인 대여함을 열고 닫을 수 있는 무인 대여함 시스템
+## 프로젝트 구성
+### 프로젝트 명 
+* IoT를 활용한 공간 대여 무인 시스템
+### 구현 목표 
+* IoT를 이용한 인증을 통해 무인 대여함을 열고 닫을 수 있는 무인 대여함 시스템
 
 ---
-##구현 내용
-###분석(2종)
+## 구현 내용
+### 분석(2종)
 1. 요구사항 정의서
 2.요구사항 분석서
 
@@ -26,21 +28,21 @@
 13. 프로그램 목록
 
 ---
-##개발 환경
-###운영 체제 
+## 개발 환경
+### 운영 체제 
 1. Windows
 2. Raspbian
 
-###개발 언어 
+### 개발 언어 
 * JAVA, Servlet, JSP, SQL, HTML, Javascript, CSS, JQuery
 
-###개발 도구
+### 개발 도구
 * Eclipse, MySQL, Oracle 18c, MySQL Workbench, SQL Developer, 
 * Tomcat, Subversion, Git, Maven, Star UML
 
-###프레임워크 및 패턴 
+### 프레임워크 및 패턴 
 * Spring 5, MyBatis, Spring Boot
 
-###개발 인원 
+### 개발 인원 
 * 이동연 (외 3 인 프로젝트)
 * 담당 업무 분석, 설계, 구현 100 % 참여
