@@ -2,6 +2,8 @@
 ---
 ## 프로젝트 구성
 ### SRUS(서버), ADS(인증데스크 시스템), RBS(무인 대여함 시스템)으로 분할
+* 인증데스크 시스템 : https://github.com/SpaceRentalUnmannedSystem/ADS
+* 무인 대여함 시스템 : https://github.com/SpaceRentalUnmannedSystem/RBS
 ### 프로젝트 명 
 * IoT를 활용한 공간 대여 무인 시스템
 ### 구현 목표 
