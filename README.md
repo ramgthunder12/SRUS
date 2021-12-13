@@ -27,16 +27,17 @@
 
 
 ## 4. 핵심 기능
-이 서비스의 핵심 기능은 무인 대여함 주문 및 결제입니다.  
-사용자는 자신이 사용하고 싶은 무인 대여함을 주문하고 결제할 수 있습니다.  
-아래는 주문 시 핵심 페이지 입니다. 
+이 서비스의 핵심 기능은 무인 대여함 주문 및 결제, 카드 NFC를 이용한 인증입니다.  
+사용자는 자신이 사용하고 싶은 무인 대여함을 주문하고 결제할 수 있고,
+이 후에 카드를 이용해 무인 대여함을 이용할 수 있습니다.
+아래는 핵심 기능 설명입니다.
 
 <details>
 <summary><b>핵심  설명 펼치기</b></summary>
 <div markdown="1">
 
-### 4.1. 전체 흐름
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow1.png)
+### 4.1. 카드 인증 전체 흐름
+![image](https://user-images.githubusercontent.com/63217462/145766832-d55d0bee-2fe1-4c86-b08f-b3fc9e6e38bb.png)
 
 ### 4.2. 사용자 요청
 ![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_vue.png)
