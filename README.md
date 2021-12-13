@@ -30,6 +30,7 @@
 이 서비스의 핵심 기능은 무인 대여함 주문 및 결제, 카드 NFC를 이용한 인증입니다.  
 사용자는 자신이 사용하고 싶은 무인 대여함을 주문하고 결제할 수 있고,
 이 후에 카드를 이용해 무인 대여함을 이용할 수 있습니다.
+
 아래는 핵심 기능 설명입니다.
 
 <details>
@@ -50,16 +51,14 @@
   - 카드 등록 시 카드 UUID를 데이터베이스에 저장합니다.
   - 이 후 사용하는 사용자는 등록한 카드를 NFC 리더기에 대면 인증이 완료되어 무인대여함이 열리게 됩니다.
 
-### 4.3. Controller 
-:pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberController.java#L48)
+### 4.3. Controller :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberController.java#L48)
 - **요청 처리**
   - Controller에서는 요청을 화면단에서 넘어온 요청을 받고, Service 계층에 로직 처리를 위임합니다.
 
 - **결과 응답**
   - Service 계층에서 넘어온 로직 처리 결과(메세지)를 화면단에 응답해줍니다.
 
-### 4.4. Service
-:pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberServiceImpl.java#L18)
+### 4.4. Service :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberServiceImpl.java#L18)
 
 - **NFC 수신()** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L64)
   - 사용자가 카드 정보 갱신을 할 때 NFC기기를 통해 UUID 값을 읽어옵니다.
@@ -67,8 +66,7 @@
 - **Repository 계층으로 인계** 
   - 위에서 받은 카드 UUID 값을 가진 DTO를 Repository 계층으로 인계한다.
 
-### 4.5. Repository
-:pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L44)
+### 4.5. Repository :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L44)
 
 - **카드 UUID 값을 가진 URL을 전송** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/SRUS/blob/master/srus/src/main/java/kr/co/srus/member/MemberController.java#L203)
   - SRUS 서버로 카드 UUID 값을 가진 URL을 전송시킨다.
