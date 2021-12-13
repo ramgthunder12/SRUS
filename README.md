@@ -40,14 +40,15 @@
 ![image](https://user-images.githubusercontent.com/63217462/145766832-d55d0bee-2fe1-4c86-b08f-b3fc9e6e38bb.png)
 
 ### 4.2. 사용자 요청
+![image](https://user-images.githubusercontent.com/63217462/145767707-43334b5b-c824-4ac7-9a03-a3e14e044248.png)
+
+  
 ![image](https://user-images.githubusercontent.com/63217462/145767091-594889f2-02bd-4dd5-9ad2-d65d861aade7.png)
 
-- **URL 정규식 체크** :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
-  - Vue.js로 렌더링된 화면단에서, 사용자가 등록을 시도한 URL의 모양새를 정규식으로 확인합니다.
-  - URL의 모양새가 아닌 경우, 에러 메세지를 띄웁니다.
-
-- **Axios 비동기 요청** :pushpin: [코드 확인]()
-  - URL의 모양새인 경우, 컨텐츠를 등록하는 POST 요청을 비동기로 날립니다.
+- **사용자의 카드 등록** :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
+  - 처음 사용하는 사용자는 인증 데스크에서 카드를 등록을 합니다.
+  - 카드 등록 시 카드 UUID를 데이터베이스에 저장합니다.
+  - 이 후 사용하는 사용자는 등록한 카드를 NFC 리더기에 대면 인증이 완료되어 무인대여함이 열리게 됩니다.
 
 ### 4.3. Controller
 
