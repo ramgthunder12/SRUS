@@ -1,29 +1,24 @@
-# :pushpin: goQuality
->고퀄리티 개발 컨텐츠 공유 서비스  
->https://go-quality.dev  
-
-</br>
 
 ## 1. 제작 기간 & 참여 인원
-- 2019년 2월 18일 ~ 4월 5일
-- 개인 프로젝트
+- 2020년 10월 ~ 2020년 12월
+- 팀 프로젝트
 
 </br>
 
 ## 2. 사용 기술
 #### `Back-end`
-  - Java 8 버전 명시 중요  버전 명시 순서 자신의 주요 언어 -> 주요 프레임웤 -> 데이터베이스 -> 그외의것들
-  - Spring Boot 2.3
-  - Gradle
-  - Spring Data JPA
-  - QueryDSL
-  - H2
-  - MySQL 5.7
-  - Spring Security
-  - Jsoup
+  - Java 8
+  - Servlet
+  - Jsp
+  - Spring Boot 2.4
+  - Mybatis
+  - Maven
+  - MySQL
 #### `Front-end`
-  - Vue.js 3.0
-  - Element UI
+  - HTML
+  - JavaScript
+  - CSS
+  - JQuery
 
 </br>
 
