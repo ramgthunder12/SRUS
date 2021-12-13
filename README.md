@@ -40,7 +40,7 @@
 ![image](https://user-images.githubusercontent.com/63217462/145766832-d55d0bee-2fe1-4c86-b08f-b3fc9e6e38bb.png)
 
 ### 4.2. 사용자 요청
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/flow_vue.png)
+![image](https://user-images.githubusercontent.com/63217462/145767091-594889f2-02bd-4dd5-9ad2-d65d861aade7.png)
 
 - **URL 정규식 체크** :pushpin: [코드 확인](https://github.com/Integerous/goQuality/blob/b587bbff4dce02e3bec4f4787151a9b6fa326319/frontend/src/components/PostInput.vue#L67)
   - Vue.js로 렌더링된 화면단에서, 사용자가 등록을 시도한 URL의 모양새를 정규식으로 확인합니다.
