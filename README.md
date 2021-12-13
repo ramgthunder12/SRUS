@@ -23,7 +23,7 @@
 </br>
 
 ## 3. ERD 설계
-![](https://zuminternet.github.io/images/portal/post/2019-04-22-ZUM-Pilot-integer/final_erd.png)
+![image](https://user-images.githubusercontent.com/63217462/145765596-2f0d3a22-19da-488e-a85f-5c21709345f8.png)
 
 
 ## 4. 핵심 기능
