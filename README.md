@@ -4,29 +4,7 @@
 - 팀 프로젝트
 
 </br>
-
-## 2. 사용 기술
-#### `Back-end`
-  - Java 8
-  - Servlet
-  - Jsp
-  - Spring Boot 2.4
-  - Mybatis
-  - Maven
-  - MySQL
-#### `Front-end`
-  - HTML
-  - JavaScript
-  - CSS
-  - JQuery
-
-</br>
-
-## 3. ERD 설계
-![image](https://user-images.githubusercontent.com/63217462/145765596-2f0d3a22-19da-488e-a85f-5c21709345f8.png)
-
-
-## 4. 핵심 기능
+## 2. 핵심 기능
 이 서비스의 핵심 기능은 무인 대여함 주문 및 결제, 카드 NFC를 이용한 인증입니다.  
 사용자는 자신이 사용하고 싶은 무인 대여함을 주문하고 결제할 수 있고,
 이 후에 카드를 이용해 무인 대여함을 이용할 수 있습니다.
@@ -34,7 +12,7 @@
 아래는 핵심 기능 설명입니다.
 
 <details>
-<summary><b>핵심  설명 펼치기</b></summary>
+<summary><b>카드 인증 핵심 설명 펼치기</b></summary>
 <div markdown="1">
 
 ### 4.1. 카드 인증 전체 흐름
@@ -78,10 +56,59 @@
 </div>
 </details>
 
+<details>
+<summary><b>결제 핵심 설명 펼치기</b></summary>
+<div markdown="1">
+
+### 4.1. 사용자 요청
+![결제1](https://user-images.githubusercontent.com/63217462/172066260-c4ead5cc-21ed-4e20-8f03-a1aa2cc7d50a.PNG)
+
+ 
+![결제2](https://user-images.githubusercontent.com/63217462/172066269-b4091361-8234-489f-81ae-37bad36e7c78.PNG)
+
+  
+![결제3](https://user-images.githubusercontent.com/63217462/172066274-df611b3d-2d0c-45d5-89e1-76d4faab4903.PNG)
+
+  
+- **아임 포트 API를 통한 결제** :pushpin: [코드 확인]
+  (https://github.com/SpaceRentalUnmannedSystem/SRUS/blob/master/srus/src/main/webapp/WEB-INF/jsp/payment/confirmationform.jsp#L93)
+  - 아임포트 API 문서를 참고하여 아임포트에 API요청
+</div>
+</details>
+
 </br>
 
-## 5. 핵심 트러블 슈팅
-### 5.1. 컨텐츠 필터와 페이징 처리 문제
+
+## 3. 사용 기술
+#### `Back-end`
+  - Java 11
+  - Servlet
+  - Jsp
+  - Spring Boot 2.4
+  - Mybatis
+  - Maven
+  - MySQL
+#### `Front-end`
+  - HTML
+  - JavaScript
+  - CSS
+  - JQuery
+
+</br>
+
+## 4. Applicaiont UI
+자세한 사항은 👉 
+
+
+## 5. 시스템 구성도
+![image](https://user-images.githubusercontent.com/63217462/172065943-0480c265-d5ac-4458-b4c4-bbd4d59000e0.png)
+
+## 6. ERD 설계
+![image](https://user-images.githubusercontent.com/63217462/145765596-2f0d3a22-19da-488e-a85f-5c21709345f8.png)
+
+
+## 7. 핵심 트러블 슈팅
+### 7.1. 컨텐츠 필터와 페이징 처리 문제
 - 저는 이 서비스가 페이스북이나 인스타그램 처럼 가볍게, 자주 사용되길 바라는 마음으로 개발했습니다.  
 때문에 페이징 처리도 무한 스크롤을 적용했습니다.
 
