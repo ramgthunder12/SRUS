@@ -107,8 +107,9 @@
 
 
 ## 5. Applicaiont UI
-자세한 사항은 👉 
+자세한 사항은 👉 [화면정의서7.0.pptx](https://github.com/SpaceRentalUnmannedSystem/SRUS/files/8840606/7.0.pptx)
 
+</br>
 
 ## 6. 시스템 구성도
 ![image](https://user-images.githubusercontent.com/63217462/172065943-0480c265-d5ac-4458-b4c4-bbd4d59000e0.png)
