@@ -39,13 +39,13 @@
 아래는 핵심 기능 설명입니다.
 
 <details>
-<summary><b>4.1 카드 인증 핵심 설명 펼치기</b></summary>
+<summary><b>카드 인증 핵심 설명 펼치기</b></summary>
 <div markdown="1">
 
 ### 4.1.1 카드 인증 전체 흐름
 ![image](https://user-images.githubusercontent.com/63217462/145766832-d55d0bee-2fe1-4c86-b08f-b3fc9e6e38bb.png)
 
-### 4.1.2 사용자 요청
+### 4.2.1 사용자 요청 (카드 등록)
 ![image](https://user-images.githubusercontent.com/63217462/145767707-43334b5b-c824-4ac7-9a03-a3e14e044248.png)
 
   
@@ -56,35 +56,43 @@
   - 카드 등록 시 카드 UUID를 데이터베이스에 저장합니다.
   - 이 후 사용하는 사용자는 등록한 카드를 NFC 리더기에 대면 인증이 완료되어 무인대여함이 열리게 됩니다.
 
-### 4.1.3 Controller :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberController.java#L48)
-- **요청 처리**
-  - Controller에서는 요청을 화면단에서 넘어온 요청을 받고, Service 계층에 로직 처리를 위임합니다.
+- **Controller** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberController.java#L48)
+  - **요청 처리**
+    - Controller에서는 요청을 화면단에서 넘어온 요청을 받고, Service 계층에 로직 처리를 위임합니다.
 
-- **결과 응답**
-  - Service 계층에서 넘어온 로직 처리 결과(메세지)를 화면단에 응답해줍니다.
+  - **결과 응답**
+    - Service 계층에서 넘어온 로직 처리 결과(메세지)를 화면단에 응답해줍니다.
 
-### 4.1.4 Service :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberServiceImpl.java#L18)
+- **Service** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberServiceImpl.java#L18)
+  - **NFC 수신()** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L64)
+    - 사용자가 카드 정보 갱신을 할 때 NFC기기를 통해 UUID 값을 읽어옵니다.
 
-- **NFC 수신()** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L64)
-  - 사용자가 카드 정보 갱신을 할 때 NFC기기를 통해 UUID 값을 읽어옵니다.
+  - **Repository 계층으로 인계** 
+    - 위에서 받은 카드 UUID 값을 가진 DTO를 Repository 계층으로 인계한다.
 
-- **Repository 계층으로 인계** 
-  - 위에서 받은 카드 UUID 값을 가진 DTO를 Repository 계층으로 인계한다.
+- **Repository** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L44)
+  - **카드 UUID 값을 가진 URL을 전송**
+    - SRUS 서버로 카드 UUID 값을 가진 URL을 전송시킨다.
+    - 이 후 SRUS 서버에서 데이터베이스에 접근해서 값을 바꾼다.
 
-### 4.1.5 Repository :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L44)
-
-- **카드 UUID 값을 가진 URL을 전송**
-  - SRUS 서버로 카드 UUID 값을 가진 URL을 전송시킨다.
-  - 이 후 SRUS 서버에서 데이터베이스에 접근해서 값을 바꾼다.
-
+### 4.3.1 사용자 요청 (인증)
+- **사용자의 카드 인증** 
+  - 카드 등록 시 카드 데이터베이스에 저장한 UUID를 통해 인증합니다.
+  - SRUS 서버 통신을 통해 인증 여부를 조회합니다.
+- **NFC 수신** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/RBS/blob/2b1d55ef5d9b4be78bed44fe506a1a4c8962164a/rentalbox/src/main/java/kr/co/rbs/rentalbox/NFCReader.java#L10)
+  - NFC를 수신합니다.
+- **인증 처리** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/RBS/blob/2b1d55ef5d9b4be78bed44fe506a1a4c8962164a/rentalbox/src/main/java/kr/co/rbs/rentalbox/RentalBoxServiceImpl.java#L30)
+  - 받은 키값으로 인증 처리를 진행합니다.
+- **SRUS 서버로 인증 처리 요청** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/RBS/blob/2b1d55ef5d9b4be78bed44fe506a1a4c8962164a/rentalbox/src/main/java/kr/co/rbs/rentalbox/RentalBoxRepositoryImpl.java#L129)
+  - SRUS 서버로 인증 처리를 요청 후 인증 결과를 가져옵니다.
 </div>
 </details>
 
 <details>
-<summary><b>3.2 결제 핵심 설명 펼치기</b></summary>
+<summary><b>결제 핵심 설명 펼치기</b></summary>
 <div markdown="1">
 
-### 4.2.1 사용자 요청
+### 4.2.1 사용자 요청 (결제)
 ![결제1](https://user-images.githubusercontent.com/63217462/172066260-c4ead5cc-21ed-4e20-8f03-a1aa2cc7d50a.PNG)
 
  
