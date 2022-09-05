@@ -51,7 +51,7 @@
   
 ![image](https://user-images.githubusercontent.com/63217462/145767091-594889f2-02bd-4dd5-9ad2-d65d861aade7.png)
 
-- **사용자의 카드 등록** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberController.java#L48)
+- **사용자의 카드 등록** 
   - 처음 사용하는 사용자는 인증 데스크에서 카드를 등록을 합니다.
   - 카드 등록 시 카드 UUID를 데이터베이스에 저장합니다.
   - 이 후 사용하는 사용자는 등록한 카드를 NFC 리더기에 대면 인증이 완료되어 무인대여함이 열리게 됩니다.
@@ -76,7 +76,7 @@
 ### 4.1.5 Repository 
   :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/ADS/blob/master/ads/src/main/java/kr/co/ads/member/MemberRepositoryImpl.java#L44)
 
-- **카드 UUID 값을 가진 URL을 전송** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/SRUS/blob/master/srus/src/main/java/kr/co/srus/member/MemberController.java#L203)
+- **카드 UUID 값을 가진 URL을 전송**
   - SRUS 서버로 카드 UUID 값을 가진 URL을 전송시킨다.
   - 이 후 SRUS 서버에서 데이터베이스에 접근해서 값을 바꾼다.
 
