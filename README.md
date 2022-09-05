@@ -42,10 +42,10 @@
 <summary><b>카드 인증 핵심 설명 펼치기</b></summary>
 <div markdown="1">
 
-### 4.1.1 카드 인증 전체 흐름
+### 카드 인증 전체 흐름
 ![image](https://user-images.githubusercontent.com/63217462/145766832-d55d0bee-2fe1-4c86-b08f-b3fc9e6e38bb.png)
 
-### 4.2.1 사용자 요청 (카드 등록)
+### 사용자 요청 (카드 등록)
 ![image](https://user-images.githubusercontent.com/63217462/145767707-43334b5b-c824-4ac7-9a03-a3e14e044248.png)
 
   
@@ -75,7 +75,7 @@
     - SRUS 서버로 카드 UUID 값을 가진 URL을 전송시킨다.
     - 이 후 SRUS 서버에서 데이터베이스에 접근해서 값을 바꾼다.
 
-### 4.3.1 사용자 요청 (인증)
+### 사용자 요청 (인증)
 - **사용자의 카드 인증** 
   - 카드 등록 시 카드 데이터베이스에 저장한 UUID를 통해 인증합니다.
   - SRUS 서버 통신을 통해 인증 여부를 조회합니다.
@@ -92,7 +92,7 @@
 <summary><b>결제 핵심 설명 펼치기</b></summary>
 <div markdown="1">
 
-### 4.2.1 사용자 요청 (결제)
+### 사용자 요청 (결제)
 ![결제1](https://user-images.githubusercontent.com/63217462/172066260-c4ead5cc-21ed-4e20-8f03-a1aa2cc7d50a.PNG)
 
  
