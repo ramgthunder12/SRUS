@@ -97,8 +97,7 @@
 ![결제3](https://user-images.githubusercontent.com/63217462/172066274-df611b3d-2d0c-45d5-89e1-76d4faab4903.PNG)
 
   
-- **아임 포트 API를 통한 결제** :pushpin: [코드 확인]
-  (https://github.com/SpaceRentalUnmannedSystem/SRUS/blob/master/srus/src/main/webapp/WEB-INF/jsp/payment/confirmationform.jsp#L93)
+- **아임 포트 API를 통한 결제** :pushpin: [코드 확인](https://github.com/SpaceRentalUnmannedSystem/SRUS/blob/master/srus/src/main/webapp/WEB-INF/jsp/payment/confirmationform.jsp#L93)
   - 아임포트 API 문서를 참고하여 아임포트에 API요청
 </div>
 </details>
