@@ -1,3 +1,8 @@
+### 📺 프로젝트 시연 영상
+
+[![시연 영상](http://img.youtube.com/vi/qN9hVuIpnnw/0.jpg)](https://www.youtube.com/watch?v=qN9hVuIpnnw)
+👉 클릭 시 YouTube에서 전체 시연 영상을 볼 수 있습니다.
+
 
 ## 1. 제작 기간 & 참여 인원
 - 2020년 10월 ~ 2020년 12월
