@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.srus.member.Member;
 import kr.co.srus.member.MemberMapper;
@@ -17,6 +18,7 @@ public class CommonServiceImpl implements CommonService {
 
 	// 로그인
 	@Override
+	@Transactional(readOnly = true)
 	public boolean login(Member member) throws Exception {
 		boolean isLogin = false;
 		
