@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.srus.member.Member;
 import kr.co.srus.rentalbox.RentalBox;
@@ -22,7 +21,6 @@ public class RentalServiceImpl implements RentalService {
 
 	// 대여 불가능 일자 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<String> searchUnrentableDate(RentalBox rentalBox) throws Exception {
 		int rentalBoxNo = rentalBox.getNo();
 
@@ -66,14 +64,12 @@ public class RentalServiceImpl implements RentalService {
 
 	// 대여 정보 등록
 	@Override
-	@Transactional
 	public void registerRentalInfo(Rental rental) throws Exception {
 		rentalMapper.insert(rental);
 	}
 
 	// 대여 정보 목록 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<Rental> searchRentalInfoList(Rental rental) throws Exception {
 
 		return rentalMapper.selectAll(rental);
@@ -81,7 +77,6 @@ public class RentalServiceImpl implements RentalService {
 
 	// 대여 정보 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<Rental> searchRentalInfo(Rental rental) throws Exception {
 
 		return rentalMapper.selectAllById(rental);
@@ -89,7 +84,6 @@ public class RentalServiceImpl implements RentalService {
 
 	// 대여 정보 수정
 	@Override
-	@Transactional
 	public void modifyRentalInfo(Rental rental) throws Exception {
 		if (rentalMapper.select(rental) != null) {
 			rentalMapper.update(rental);
@@ -98,7 +92,6 @@ public class RentalServiceImpl implements RentalService {
 	
 	// 결제 금액 계산
 	@Override
-	@Transactional(readOnly = true)
 	public int calculatePayment(Rental rental) throws Exception {
 		LocalDate startDate = null;
 		LocalDate endDate = null;
@@ -123,7 +116,6 @@ public class RentalServiceImpl implements RentalService {
 
 	// 현재 대여정보 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<Rental> searchCurrentRental(Member member) throws Exception {
 		Rental rental = new Rental();
 		rental.setMemberId(member.getId());

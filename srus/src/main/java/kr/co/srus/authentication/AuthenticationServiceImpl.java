@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.srus.member.Member;
 import kr.co.srus.member.MemberMapper;
@@ -20,7 +19,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	// 인증키 부여
 	@Override
-	@Transactional
 	public boolean grantAuthInfo(Member member, RentalBox rentalBox) throws Exception {
 		boolean result = false;
 
@@ -40,7 +38,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	// 카드UID 대조
 	@Override
-	@Transactional
 	public boolean compareCardUID(RentalBox rentalBox) throws Exception {
 		boolean isMatched = false;
 		

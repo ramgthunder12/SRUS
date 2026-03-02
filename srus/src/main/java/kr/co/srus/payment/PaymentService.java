@@ -7,5 +7,5 @@ public interface PaymentService {
 	public String getToken(String requestURL) throws Exception;
 
 	// 결제 취소
-	public void cancelPayment(Rental rental, String token) throws Exception;
+	public void cancelPayment(Rental rental, String token);
 }

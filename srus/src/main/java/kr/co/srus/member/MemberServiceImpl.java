@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -13,7 +12,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 아이디 찾기
 	@Override
-	@Transactional(readOnly = true)
 	public List<Member> findId(Member member) throws Exception {
 		List<Member> rows = memberMapper.selectAll(member);
 		
@@ -35,7 +33,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 비밀번호 찾기
 	@Override
-	@Transactional(readOnly = true)
 	public Member findPassword(Member member) throws Exception {
 		Member row = memberMapper.select(member);
 
@@ -54,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 핸드폰 번호 대조
-	@Transactional(readOnly = true)
 	public boolean comparePhoneNumber(Member member) throws Exception {
 		boolean result = false;
 		Member row = memberMapper.select(member);
@@ -68,7 +64,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 사용자 정보 등록
 	@Override
-	@Transactional
 	public void registerMemberInfo(Member member) throws Exception {
 		Member memberInfo = new Member();
 		memberInfo.setId(member.getId());
@@ -82,7 +77,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원 목록 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<Member> searchMemberInfoList(Member member) throws Exception {
 		
 		return memberMapper.selectAllById(member);
@@ -90,7 +84,6 @@ public class MemberServiceImpl implements MemberService {
 
 	// 사용자 정보 조회
 	@Override
-	@Transactional(readOnly = true)
 	public Member searchMemberInfo(Member member) throws Exception {
 		Member row = memberMapper.select(member);
 		
@@ -99,14 +92,12 @@ public class MemberServiceImpl implements MemberService {
 
 	// 회원 정보 수정
 	@Override
-	@Transactional
 	public void modifyMemberInfo(Member member) throws Exception {
 		memberMapper.update(member);
 	}
 
 	// 카드 정보 수정
 	@Override
-	@Transactional
 	public boolean cardMemberInfo(Member member) throws Exception {
 		if (member.getCardUid() != null && !member.getCardUid().isEmpty()) {
 			memberMapper.update(member);

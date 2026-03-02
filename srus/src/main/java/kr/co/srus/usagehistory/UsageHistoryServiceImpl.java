@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.srus.rental.Rental;
 import kr.co.srus.rental.RentalMapper;
@@ -19,7 +18,6 @@ public class UsageHistoryServiceImpl implements UsageHistoryService {
 
 	// 이용 내역 등록
 	@Override
-	@Transactional
 	public void registerUsageHistory(UsageHistory usageHistory) throws Exception {
 		Rental rental = new Rental();
 		rental.setRentalBoxNo(usageHistory.getRentalBoxNo());
@@ -43,7 +41,6 @@ public class UsageHistoryServiceImpl implements UsageHistoryService {
 
 	// 이용 내역 목록 조회
 	@Override
-	@Transactional(readOnly = true)
 	public List<UsageHistory> searchUsageHistoryList(UsageHistory usageHistory) throws Exception {
 		
 		return usageHistoryMapper.selectAll(usageHistory);
