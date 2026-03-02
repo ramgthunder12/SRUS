@@ -72,16 +72,16 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	// 결제 취소
-	public void cancelPayment(Rental rental, String token) {
+	public void cancelPayment(Rental rental, String token) throws Exception {
 		HttpURLConnection connection = null;
 		BufferedReader bufferedReader = null;
 		JsonObject object = new JsonObject();
+		boolean apiSuccess = false;
+
+		rental = rentalMapper.select(rental);
+		object.addProperty("merchant_uid", rental.getMerchantUid());
 
 		try {
-			rental = rentalMapper.select(rental);
-
-			object.addProperty("merchant_uid", rental.getMerchantUid());
-
 			URL url = new URL("https://api.iamport.kr/payments/cancel");
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
@@ -90,40 +90,47 @@ public class PaymentServiceImpl implements PaymentService {
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Content-Type", "application/json");
 			connection.setRequestProperty("Authorization", token);
-			
+
 			OutputStream out = connection.getOutputStream();
 			out.write(object.toString().getBytes());
 			connection.connect();
 
-			StringBuilder stringBuilder = new StringBuilder();
-
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+				StringBuilder stringBuilder = new StringBuilder();
 				String line = null;
 				while ((line = bufferedReader.readLine()) != null) {
 					stringBuilder.append(line + "\n");
 				}
+
+				JsonParser jsonParser = new JsonParser();
+				JsonElement jsonElement = jsonParser.parse(stringBuilder.toString());
+
+				if (jsonElement.getAsJsonObject().get("code").getAsLong() == 0) {
+					apiSuccess = true;
+				}
 			}
 
 			out.flush();
-			
-			rental.setCancellationDate(LocalDate.now());
-			rentalMapper.update(rental);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+
 		} finally {
 			try {
 				if (bufferedReader != null) {
 					bufferedReader.close();
 				}
-
-				if (connection != null) {
-					connection.disconnect();
-				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			if (connection != null) {
+				connection.disconnect();
+			}
 		}
+
+		if (!apiSuccess) {
+			throw new Exception("결제 취소 API 호출에 실패했습니다.");
+		}
+
+		rental.setCancellationDate(LocalDate.now());
+		rentalMapper.update(rental);
 	}
 }
