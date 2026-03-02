@@ -12,6 +12,9 @@ import kr.co.srus.rentalbox.RentalBoxMapper;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+	private static final long AUTH_VALIDITY_MINUTES = 1;
+	private static final long AUTH_GRACE_PERIOD_SECONDS = 5;
+
 	@Autowired
 	private MemberMapper memberMapper;
 	@Autowired
@@ -19,7 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	// 인증키 부여
 	@Override
-	public boolean grantAuthInfo(Member member, RentalBox rentalBox) throws Exception {
+	public synchronized boolean grantAuthInfo(Member member, RentalBox rentalBox) throws Exception {
 		boolean result = false;
 
 		Member row = memberMapper.select(member);
@@ -38,21 +41,28 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	// 카드UID 대조
 	@Override
-	public boolean compareCardUID(RentalBox rentalBox) throws Exception {
+	public synchronized boolean compareCardUID(RentalBox rentalBox) throws Exception {
 		boolean isMatched = false;
 		
 		RentalBox row = rentalBoxMapper.select(rentalBox);
 
 		if (row != null && row.getAuthKey() != null) {
-			LocalDateTime authIssueDate = row.getAuthIssueDate().plusMinutes(1);
+			LocalDateTime now = LocalDateTime.now();
+			LocalDateTime authExpiryDate = row.getAuthIssueDate().plusMinutes(AUTH_VALIDITY_MINUTES);
+			LocalDateTime graceExpiryDate = authExpiryDate.plusSeconds(AUTH_GRACE_PERIOD_SECONDS);
 			
-			if (LocalDateTime.now().isAfter(authIssueDate)) {
+			if (!now.isAfter(authExpiryDate)) {
+				isMatched = true;
+			} else if (!now.isAfter(graceExpiryDate)) {
+				isMatched = true;
+
 				row.setAuthIssueDate(null);
 				row.setAuthKey(null);
-				
 				rentalBoxMapper.updateAuth(row);
 			} else {
-				isMatched = true;
+				row.setAuthIssueDate(null);
+				row.setAuthKey(null);
+				rentalBoxMapper.updateAuth(row);
 			}
 		}
 
