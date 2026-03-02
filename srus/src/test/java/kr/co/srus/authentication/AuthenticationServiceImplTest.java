@@ -106,4 +106,19 @@ class AuthenticationServiceImplTest {
 		assertFalse(result);
 		verify(rentalBoxMapper, never()).updateAuth(any(RentalBox.class));
 	}
+
+	@Test
+	void compareCardUID_mismatchedCardUid_returnsFalse() throws Exception {
+		RentalBox storedBox = new RentalBox();
+		storedBox.setNo(1);
+		storedBox.setAuthKey("different-card-uid");
+		storedBox.setAuthIssueDate(LocalDateTime.now().minusSeconds(30));
+
+		when(rentalBoxMapper.select(any(RentalBox.class))).thenReturn(storedBox);
+
+		boolean result = authenticationService.compareCardUID(requestRentalBox);
+
+		assertFalse(result);
+		verify(rentalBoxMapper, never()).updateAuth(any(RentalBox.class));
+	}
 }

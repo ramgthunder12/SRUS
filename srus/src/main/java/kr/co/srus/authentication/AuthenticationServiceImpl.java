@@ -46,14 +46,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		
 		RentalBox row = rentalBoxMapper.select(rentalBox);
 
-		if (row != null && row.getAuthKey() != null) {
+		if (row != null && row.getAuthKey() != null
+				&& row.getAuthKey().equals(rentalBox.getAuthKey())) {
 			LocalDateTime now = LocalDateTime.now();
 			LocalDateTime authExpiryDate = row.getAuthIssueDate().plusMinutes(AUTH_VALIDITY_MINUTES);
 			LocalDateTime graceExpiryDate = authExpiryDate.plusSeconds(AUTH_GRACE_PERIOD_SECONDS);
 			
-			if (!now.isAfter(authExpiryDate)) {
+			if (now.isBefore(authExpiryDate) || now.isEqual(authExpiryDate)) {
 				isMatched = true;
-			} else if (!now.isAfter(graceExpiryDate)) {
+			} else if (now.isBefore(graceExpiryDate) || now.isEqual(graceExpiryDate)) {
 				isMatched = true;
 
 				row.setAuthIssueDate(null);
