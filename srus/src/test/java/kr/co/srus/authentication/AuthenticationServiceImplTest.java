@@ -38,6 +38,7 @@ class AuthenticationServiceImplTest {
 		requestRentalBox.setAuthKey("test-card-uid");
 	}
 
+	// 유효 시간 이내 카드 인증 테스트
 	@Test
 	void compareCardUID_withinValidWindow_returnsTrue() throws Exception {
 		RentalBox storedBox = new RentalBox();
@@ -53,6 +54,7 @@ class AuthenticationServiceImplTest {
 		verify(rentalBoxMapper, never()).updateAuth(any(RentalBox.class));
 	}
 
+	// 유예 기간 이내 카드 인증 테스트 (인증 성공 후 인증 정보 초기화)
 	@Test
 	void compareCardUID_withinGracePeriod_returnsTrueAndClearsAuth() throws Exception {
 		RentalBox storedBox = new RentalBox();
@@ -68,6 +70,7 @@ class AuthenticationServiceImplTest {
 		verify(rentalBoxMapper).updateAuth(any(RentalBox.class));
 	}
 
+	// 유예 기간 초과 후 카드 인증 테스트 (인증 실패 및 인증 정보 초기화)
 	@Test
 	void compareCardUID_pastGracePeriod_returnsFalseAndClearsAuth() throws Exception {
 		RentalBox storedBox = new RentalBox();
@@ -83,6 +86,7 @@ class AuthenticationServiceImplTest {
 		verify(rentalBoxMapper).updateAuth(any(RentalBox.class));
 	}
 
+	// 인증키 없는 경우 테스트
 	@Test
 	void compareCardUID_noAuthKey_returnsFalse() throws Exception {
 		RentalBox storedBox = new RentalBox();
@@ -97,6 +101,7 @@ class AuthenticationServiceImplTest {
 		verify(rentalBoxMapper, never()).updateAuth(any(RentalBox.class));
 	}
 
+	// 무인대여함 조회 실패 테스트
 	@Test
 	void compareCardUID_rentalBoxNotFound_returnsFalse() throws Exception {
 		when(rentalBoxMapper.select(any(RentalBox.class))).thenReturn(null);
@@ -107,6 +112,7 @@ class AuthenticationServiceImplTest {
 		verify(rentalBoxMapper, never()).updateAuth(any(RentalBox.class));
 	}
 
+	// 카드 UID 불일치 테스트
 	@Test
 	void compareCardUID_mismatchedCardUid_returnsFalse() throws Exception {
 		RentalBox storedBox = new RentalBox();
